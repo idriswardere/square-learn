@@ -36,7 +36,7 @@ class Model:
         Parameters:
         ----------
         x
-            A single observation without the label.
+            A dataframe (or series) containing a single observation.
 
         Returns:
         ----------

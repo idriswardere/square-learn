@@ -5,15 +5,13 @@ import random
 
 class SGDRegressor(Model):
     """
-    A regression model that's trained by stochastic gradient descent
-    using a given gradient function.
+    A parent class for a regression model that's trained using stochastic 
+    gradient descent. 
+    
+    The functions calc_gradient and predict are not implemented.
 
     Attributes:
     ----------
-    calc_gradient(theta, X, y)
-        A function to calculate the gradient of the loss function from
-        weights (theta), a dataframe of the observations without labels
-        (X), and the labels of the observations (y).
     epochs
         The number of passes the model makes through the dataset.
     batch_size
@@ -27,24 +25,23 @@ class SGDRegressor(Model):
     
     Functions:
     ----------
+    calc_gradient(batch_X, batch_y) [NOT IMPLEMENTED]
+        A function that calculates the gradient of the loss function.
+    sgd(batch_X, batch_y):
+        Performs one step of stochastic gradient descent.
     train(X, y):
         Trains the model on a dataset and the corresponding labels.
-    
-    predict(x):
+    predict(x): [NOT IMPLEMENTED]
         Makes a prediction from a given observation.
 
     """
 
-    def __init__(self, calc_gradient, epochs, batch_size=1, learning_rate=0.001, seed=0):
+    def __init__(self, epochs, batch_size=1, learning_rate=0.001, seed=0):
         """
         Initializes the SGDRegressor.
 
         Parameters:
         ----------
-        calc_gradient(theta, X, y)
-            A function to calculate the gradient of the loss function from
-            weights (theta), a dataframe of a batch of observations without 
-            labels (X), and the labels of those observations (y).
         epochs
             The number of passes the model makes through the dataset.
         batch_size
@@ -60,12 +57,24 @@ class SGDRegressor(Model):
         ----------
             An SGDRegressor with initialized hyperparameters. 
         """
-        self.calc_gradient = calc_gradient
         self.epochs = epochs
         self.batch_size = batch_size
         self.learning_rate = learning_rate
         self.seed = seed
         random.seed(self.seed)
+
+    def calc_gradient(self, batch_X, batch_y):
+        """
+        A function to calculate the gradient of the loss function.
+        
+        Parameters:
+        ----------
+        batch_X 
+            A dataframe of a batch of observations without labels
+        batch_y
+            A dataframe (or series) of the labels of those observations.
+        """
+        pass
 
     def sgd(self, batch_X, batch_y):
         """
@@ -79,7 +88,7 @@ class SGDRegressor(Model):
             A dataframe (or series) containing the labels
             for batch_X
         """
-        gradient = self.calc_gradient(self.theta, batch_X, batch_y)
+        gradient = self.calc_gradient(batch_X, batch_y)
         self.theta = self.theta - self.learning_rate*gradient
 
     def train(self, X, y):
@@ -108,14 +117,14 @@ class SGDRegressor(Model):
                 batch_y = y.iloc[batch_i]
                 self.sgd(batch_X, batch_y)
 
-    def predict(self, X, y):
+    def predict(self, x):
         """
         Makes a prediction from a given observation.
 
         Parameters:
         ----------
         x
-            A single observation without the label.
+            A dataframe (or series) containing a single observation.
 
         Returns:
         ----------
