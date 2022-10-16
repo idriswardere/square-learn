@@ -25,13 +25,13 @@ class SGDRegressor(Model):
     
     Functions:
     ----------
-    calc_gradient(batch_X, batch_y) [NOT IMPLEMENTED]
+    calc_gradient(self, batch_X, batch_y) [NOT IMPLEMENTED]
         A function that calculates the gradient of the loss function.
-    sgd(batch_X, batch_y):
+    sgd(self, batch_X, batch_y):
         Performs one step of stochastic gradient descent.
-    train(X, y):
+    train(self, X, y):
         Trains the model on a dataset and the corresponding labels.
-    predict(x): [NOT IMPLEMENTED]
+    predict(self, x): [NOT IMPLEMENTED]
         Makes prediction from a dataframe of observations.
 
     """

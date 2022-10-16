@@ -7,10 +7,10 @@ class Model:
 
     Functions:
     ----------
-    train(X, y):
+    train(self, X, y):
         Trains the model on a dataset and the corresponding labels.
     
-    predict(x):
+    predict(self, x):
         Makes a prediction from a given observation.
     """ 
 
