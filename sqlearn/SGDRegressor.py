@@ -32,7 +32,7 @@ class SGDRegressor(Model):
     train(X, y):
         Trains the model on a dataset and the corresponding labels.
     predict(x): [NOT IMPLEMENTED]
-        Makes a prediction from a given observation.
+        Makes prediction from a dataframe of observations.
 
     """
 
@@ -117,18 +117,18 @@ class SGDRegressor(Model):
                 batch_y = y.iloc[batch_i]
                 self.sgd(batch_X, batch_y)
 
-    def predict(self, x):
+    def predict(self, X):
         """
-        Makes a prediction from a given observation.
+        Makes predictions from a dataframe of observations.
 
         Parameters:
         ----------
-        x
-            A dataframe (or series) containing a single observation.
+        X
+            A dataframe (or series) containing observations.
 
         Returns:
         ----------
         y
-            The predicted label of the observation.
+            The predicted label of the observations.
         """
         pass

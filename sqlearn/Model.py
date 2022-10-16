@@ -31,17 +31,17 @@ class Model:
 
     def predict(self, x):
         """
-        Makes a prediction from a given observation.
+        Makes predictions from a dataframe of observations.
 
         Parameters:
         ----------
         x
-            A dataframe (or series) containing a single observation.
+            A dataframe (or series) containing observations.
 
         Returns:
         ----------
         y
-            The predicted label of the observation.
+            The predicted labels of the observations.
         """
         pass
 
