@@ -129,6 +129,6 @@ class SGDRegressor(Model):
         Returns:
         ----------
         y
-            The predicted label of the observations.
+            The predicted labels of the observations.
         """
         pass
