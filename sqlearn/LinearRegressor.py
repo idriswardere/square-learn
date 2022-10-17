@@ -52,7 +52,7 @@ class LinearRegressor(SGDRegressor):
             The calculated gradient.
         """
         gradient = 0
-        for i, x in enumerate(batch_X):
+        for i, x in batch_X.iterrows():
             gradient += ((x @ self.theta) - batch_y[i]) * x
         gradient /= batch_X.shape[0]
         return gradient

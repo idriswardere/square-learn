@@ -115,7 +115,8 @@ class SGDRegressor(Model):
         m = X_ones.shape[0]
         n = X_ones.shape[1]
         self.theta = pd.Series(np.zeros(n))
-        for epoch in self.epochs:
+        self.theta = self.theta.set_axis(X_ones.columns)
+        for epoch in range(self.epochs):
             for batch in range(m):
                 batch_i = random.sample(range(m), self.batch_size)
                 batch_X = X_ones.iloc[batch_i]

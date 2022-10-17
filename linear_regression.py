@@ -14,17 +14,19 @@ def main():
     test_y = test_data["heart_disease"]
 
     epochs = 5
-    lr = LinearRegressor(epochs)
+    lr = LinearRegressor(epochs, batch_size=2)
     lr.train(train_X, train_y)
 
     preds = lr.predict(test_X)
+    preds = preds > 0.5
+    print(preds)
 
-    mse = 0
+    error_count = 0
     for i in range(len(preds)):
-        mse += (preds[i] - test_y[i])^2
-    mse /= len(preds)
-
-    print(mse)
+        if preds.loc[i] != test_y.loc[i]:
+            error_count += 1
+    error_rate = error_count/len(preds)
+    print(error_rate)
 
 
 
