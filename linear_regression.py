@@ -13,17 +13,16 @@ def main():
     test_X = test_data.drop("heart_disease", axis=1)
     test_y = test_data["heart_disease"]
 
-    epochs = 5
-    lr = LinearRegressor(epochs, batch_size=2)
+    epochs = 10
+    lr = LinearRegressor(epochs, batch_size=5)
     lr.train(train_X, train_y)
 
     preds = lr.predict(test_X)
     preds = preds > 0.5
-    print(preds)
 
     error_count = 0
     for i in range(len(preds)):
-        if preds.loc[i] != test_y.loc[i]:
+        if preds[i] != test_y[i]:
             error_count += 1
     error_rate = error_count/len(preds)
     print(error_rate)
