@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sqlearn import LinearRegressor
+from sqlearn.LinearRegressor import LinearRegressor
 
 def main():
     train_file = "examples/data/heart_test.tsv"
@@ -14,7 +14,7 @@ def main():
     test_y = test_data["heart_disease"]
 
     epochs = 5
-    lr = LinearRegressor(5)
+    lr = LinearRegressor(epochs)
     lr.train(train_X, train_y)
 
     preds = lr.predict(test_X)

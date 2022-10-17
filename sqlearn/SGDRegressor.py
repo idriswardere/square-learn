@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import Model
+from .Model import Model
 import random
 
 class SGDRegressor(Model):
