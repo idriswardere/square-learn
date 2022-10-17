@@ -10,7 +10,7 @@ class Model:
     train(self, X, y):
         Trains the model on a dataset and the corresponding labels.
     
-    predict(self, x):
+    predict(self, X):
         Makes a prediction from a given observation.
     """ 
 
@@ -35,7 +35,7 @@ class Model:
 
         Parameters:
         ----------
-        x
+        X
             A dataframe (or series) containing observations.
 
         Returns:

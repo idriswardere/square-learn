@@ -31,7 +31,7 @@ class SGDRegressor(Model):
         Performs one step of stochastic gradient descent.
     train(self, X, y):
         Trains the model on a dataset and the corresponding labels.
-    predict(self, x): [NOT IMPLEMENTED]
+    predict(self, X): [NOT IMPLEMENTED]
         Makes prediction from a dataframe of observations.
 
     """
@@ -73,6 +73,11 @@ class SGDRegressor(Model):
             A dataframe of a batch of observations without labels
         batch_y
             A dataframe (or series) of the labels of those observations.
+
+        Returns:
+        ----------
+        gradient
+            The calculated gradient.
         """
         pass
 
@@ -105,11 +110,11 @@ class SGDRegressor(Model):
             A dataframe (or series) containing the labels for each
             observation in X.
         """
-        ones = np.ones(X.shape[0])
-        X_ones = np.hstack((ones, X))
+        ones = pd.DataFrame(np.ones((X.shape[0], 1)))
+        X_ones = pd.concat((ones, X), axis=1)
         m = X_ones.shape[0]
         n = X_ones.shape[1]
-        self.theta = np.ones(n)
+        self.theta = pd.Series(np.zeros(n))
         for epoch in self.epochs:
             for batch in range(m):
                 batch_i = random.sample(range(m), self.batch_size)
