@@ -5,7 +5,6 @@ from sqlearn import LogisticRegressor
 
 """
 This is a demo file that shows how square-learn models are used.
-
 """
 
 def main():
