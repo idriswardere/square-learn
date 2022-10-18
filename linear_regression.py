@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sqlearn.LinearRegressor import LinearRegressor
+from sqlearn import LinearRegressor
 
 def main():
     train_file = "examples/data/heart_test.tsv"
