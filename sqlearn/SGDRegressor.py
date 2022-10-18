@@ -12,15 +12,15 @@ class SGDRegressor(Model):
 
     Attributes:
     ----------
-    epochs
+    epochs (default=5)
         The number of passes the model makes through the dataset.
-    batch_size
+    batch_size (default=1)
         The number of observations used to calculate the gradient during
         the process of stochastic gradient descent.
-    learning_rate
+    learning_rate (default=0.001)
         The rate at which the model changes during stochastic gradient
         descent.
-    seed
+    seed (default=0)
         The seed used for random processes.
     
     Functions:
@@ -36,26 +36,22 @@ class SGDRegressor(Model):
 
     """
 
-    def __init__(self, epochs, batch_size=1, learning_rate=0.001, seed=0):
+    def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
         """
         Initializes the SGDRegressor.
 
         Parameters:
         ----------
-        epochs
+        epochs (default=5)
             The number of passes the model makes through the dataset.
-        batch_size
+        batch_size (default=1)
             The number of observations used to calculate the gradient during
             the process of stochastic gradient descent.
-        learning_rate
+        learning_rate (default=0.001)
             The rate at which the model changes during stochastic gradient
             descent.
-        seed
+        seed (default=0)
             The seed used for random processes.
-        
-        Returns:
-        ----------
-            An SGDRegressor with initialized hyperparameters. 
         """
         self.epochs = epochs
         self.batch_size = batch_size
