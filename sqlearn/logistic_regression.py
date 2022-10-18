@@ -1,23 +1,32 @@
 import numpy as np
 import pandas as pd
-from .SGDRegressor import SGDRegressor
+from .sgd_regression import SGDRegressor
 
-class LinearRegressor(SGDRegressor):
+def sigmoid(x):
+    ex = np.exp(x)
+    return ex / (1 + ex)
+
+class LogisticRegressor(SGDRegressor):
     """
-    A class that represents a trainable linear regression model.
-    Uses mean squared error as the loss function.
+    A class that represents a trainable logistic regression binary 
+    classifier.
+    Uses average negative log likelihood as the loss function.
 
     Attributes:
     ----------
-    epochs
+    thresh (default=0.5)
+        The threshold at which predictions from the logistic regressor
+        change from 0 to 1. If thresh=None, then the model will output
+        probabilities instead of classifications.
+    epochs (default=5)
         The number of passes the model makes through the dataset.
-    batch_size
+    batch_size (default=1)
         The number of observations used to calculate the gradient during
         the process of stochastic gradient descent.
-    learning_rate
+    learning_rate (default=0.001)
         The rate at which the model changes during stochastic gradient
         descent.
-    seed
+    seed (default=0)
         The seed used for random processes.
     
     Functions:
@@ -32,7 +41,29 @@ class LinearRegressor(SGDRegressor):
         Makes prediction from a dataframe of observations.
     """
 
-    def __init__(self, epochs, batch_size=1, learning_rate=0.001, seed=0):
+    def __init__(self, thresh=0.5, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
+        """
+        Initializes the LogisticRegressor.
+
+        Parameters:
+        ----------
+        thresh (default=0.5)
+            The threshold at which predictions from the logistic regressor 
+            change from 0 to 1. If thresh=None, then the model will output
+            probabilities instead of classifications.
+        epochs (default=5)
+            The number of passes the model makes through the dataset.
+            
+        batch_size (default=1)
+            The number of observations used to calculate the gradient during
+            the process of stochastic gradient descent.
+        learning_rate (default=0.001)
+            The rate at which the model changes during stochastic gradient
+            descent.
+        seed (default=0)
+            The seed used for random processes.
+        """
+        self.thresh = thresh
         super().__init__(epochs, batch_size=batch_size, learning_rate=learning_rate, seed=seed)
 
     def calc_gradient(self, batch_X, batch_y):
@@ -53,13 +84,13 @@ class LinearRegressor(SGDRegressor):
         """
         gradient = 0
         for i, x in batch_X.iterrows():
-            gradient += ((x @ self.theta) - batch_y[i]) * x
+            gradient += (sigmoid(x @ self.theta) - batch_y[i]) * x
         gradient /= batch_X.shape[0]
         return gradient
 
     def train(self, X, y):
         """
-        Trains the LinearRegressor using stochastic gradient descent and the
+        Trains the LogisticRegressor using stochastic gradient descent and the
         initialized hyperparameters.
 
         Parameters:
@@ -89,5 +120,7 @@ class LinearRegressor(SGDRegressor):
         """
         ones = pd.DataFrame(np.ones((X.shape[0], 1)))
         X_ones = pd.concat((ones, X), axis=1)
-        preds = X_ones @ self.theta
+        preds = sigmoid(X_ones @ self.theta)
+        if self.thresh != None:
+            preds = preds >= self.thresh
         return preds
