@@ -3,8 +3,15 @@ import pandas as pd
 from sqlearn import LinearRegressor
 from sqlearn import LogisticRegressor
 
+"""
+This is a demo file that shows how square-learn models are used.
+
+"""
+
 def main():
-    # Processing the example data
+
+
+    # Processing the example data (pandas)
 
     train_file = "examples/data/heart_test.tsv"
     test_file = "examples/data/heart_train.tsv"
