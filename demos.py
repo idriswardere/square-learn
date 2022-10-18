@@ -8,8 +8,6 @@ This is a demo file that shows how square-learn models are used.
 """
 
 def main():
-
-
     # Processing the example data (pandas)
 
     train_file = "examples/data/heart_test.tsv"
