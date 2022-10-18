@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from .SGDRegressor import SGDRegressor
+from .sgd_regression import SGDRegressor
 
 class LinearRegressor(SGDRegressor):
     """

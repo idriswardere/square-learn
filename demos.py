@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from sqlearn import LinearRegressor
-from sqlearn.LogisticRegressor import LogisticRegressor
+from sqlearn import LogisticRegressor
 
 def main():
     # Processing the example data
