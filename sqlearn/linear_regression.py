@@ -17,6 +17,9 @@ class LinearRegressor(SGDRegressor):
     learning_rate (default=0.001)
         The rate at which the model changes during stochastic gradient
         descent.
+    l2_reg_weight (default=0)
+        The weight used for the L2 regularization. Use 0 for no L2
+        regularization.
     seed (default=0)
         The seed used for random processes.
     
@@ -33,25 +36,6 @@ class LinearRegressor(SGDRegressor):
     get_weights(self):
         Returns the trained weights of the model.
     """
-
-    # def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
-    #     """
-    #     Initializes the LinearRegressor.
-
-    #     Parameters:
-    #     ----------
-    #     epochs (default=5)
-    #         The number of passes the model makes through the dataset.
-    #     batch_size (default=1)
-    #         The number of observations used to calculate the gradient during
-    #         the process of stochastic gradient descent.
-    #     learning_rate (default=0.001)
-    #         The rate at which the model changes during stochastic gradient
-    #         descent.
-    #     seed (default=0)
-    #         The seed used for random processes.
-    #     """
-    #     super().__init__(epochs=epochs, batch_size=batch_size, learning_rate=learning_rate, seed=seed)
 
     def calc_gradient(self, batch_X, batch_y):
         """
@@ -74,22 +58,6 @@ class LinearRegressor(SGDRegressor):
             gradient += ((x @ self.theta) - batch_y[i]) * x
         gradient /= batch_X.shape[0]
         return gradient
-
-    # def train(self, X, y):
-    #     """
-    #     Trains the LinearRegressor using stochastic gradient descent and the
-    #     initialized hyperparameters.
-
-    #     Parameters:
-    #     ----------
-    #     X
-    #         A dataframe containing rows representing observations 
-    #         without a label column. Strictly numeric.
-    #     y
-    #         A dataframe (or series) containing the labels for each
-    #         observation in X.
-    #     """
-    #     super().train(X, y)
 
     def predict(self, X):
         """

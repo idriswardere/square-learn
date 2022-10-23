@@ -22,7 +22,8 @@ def main():
 
     # Evaluating LinearRegressor
 
-    linreg = LinearRegressor(epochs=10, batch_size=5, learning_rate=0.01, seed=5)
+    linreg = LinearRegressor(epochs=10, batch_size=5, learning_rate=0.01,
+                             l2_reg_weight=0.001, seed=5)
     linreg.train(train_X, train_y)
 
     linreg_preds = linreg.predict(test_X)
@@ -35,7 +36,8 @@ def main():
 
     # Evaluating LogisticRegressor
 
-    logreg = LogisticRegressor(thresh=0.5, epochs=10, batch_size=5, learning_rate=0.01, seed=4)
+    logreg = LogisticRegressor(thresh=0.5, epochs=10, batch_size=5, 
+                               learning_rate=0.01, l2_reg_weight=0.001, seed=4)
     logreg.train(train_X, train_y)
 
     logreg_preds = logreg.predict(test_X)

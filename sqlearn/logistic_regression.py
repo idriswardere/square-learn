@@ -26,6 +26,9 @@ class LogisticRegressor(SGDRegressor):
     learning_rate (default=0.001)
         The rate at which the model changes during stochastic gradient
         descent.
+    l2_reg_weight (default=0)
+        The weight used for the L2 regularization. Use 0 for no L2
+        regularization.
     seed (default=0)
         The seed used for random processes.
     
@@ -43,7 +46,7 @@ class LogisticRegressor(SGDRegressor):
         Returns the trained weights of the model.
     """
 
-    def __init__(self, thresh=0.5, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
+    def __init__(self, thresh=0.5, epochs=5, batch_size=1, learning_rate=0.001, l2_reg_weight=0, seed=0):
         """
         Initializes the LogisticRegressor.
 
@@ -66,7 +69,7 @@ class LogisticRegressor(SGDRegressor):
             The seed used for random processes.
         """
         self.thresh = thresh
-        super().__init__(epochs, batch_size=batch_size, learning_rate=learning_rate, seed=seed)
+        super().__init__(epochs, batch_size=batch_size, learning_rate=learning_rate, l2_reg_weight=l2_reg_weight, seed=seed)
 
     def calc_gradient(self, batch_X, batch_y):
         """

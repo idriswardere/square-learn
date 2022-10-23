@@ -6,7 +6,7 @@ import random
 class SGDRegressor(Model):
     """
     A parent class for a regression model that's trained using stochastic 
-    gradient descent. 
+    gradient descent and optional L2 regularization. 
     
     The functions calc_gradient and predict are not implemented.
 
@@ -20,6 +20,9 @@ class SGDRegressor(Model):
     learning_rate (default=0.001)
         The rate at which the model changes during stochastic gradient
         descent.
+    l2_reg_weight (default=0)
+        The weight used for the L2 regularization. Use 0 for no L2
+        regularization.
     seed (default=0)
         The seed used for random processes.
     
@@ -37,7 +40,7 @@ class SGDRegressor(Model):
         Returns the trained weights of the model.
     """
 
-    def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
+    def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, l2_reg_weight=0, seed=0):
         """
         Initializes the model.
 
@@ -57,6 +60,7 @@ class SGDRegressor(Model):
         self.epochs = epochs
         self.batch_size = batch_size
         self.learning_rate = learning_rate
+        self.l2_reg_weight = l2_reg_weight
         self.seed = seed
         random.seed(self.seed)
         self.theta = None
@@ -93,7 +97,7 @@ class SGDRegressor(Model):
             for batch_X
         """
         gradient = self.calc_gradient(batch_X, batch_y)
-        self.theta = self.theta - self.learning_rate*gradient
+        self.theta = self.theta - (self.learning_rate*gradient + self.l2_reg_weight*self.theta)
 
     def train(self, X, y):
         """
