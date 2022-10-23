@@ -32,24 +32,24 @@ class LinearRegressor(SGDRegressor):
         Makes prediction from a dataframe of observations.
     """
 
-    def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
-        """
-        Initializes the LinearRegressor.
+    # def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
+    #     """
+    #     Initializes the LinearRegressor.
 
-        Parameters:
-        ----------
-        epochs (default=5)
-            The number of passes the model makes through the dataset.
-        batch_size (default=1)
-            The number of observations used to calculate the gradient during
-            the process of stochastic gradient descent.
-        learning_rate (default=0.001)
-            The rate at which the model changes during stochastic gradient
-            descent.
-        seed (default=0)
-            The seed used for random processes.
-        """
-        super().__init__(epochs, batch_size=batch_size, learning_rate=learning_rate, seed=seed)
+    #     Parameters:
+    #     ----------
+    #     epochs (default=5)
+    #         The number of passes the model makes through the dataset.
+    #     batch_size (default=1)
+    #         The number of observations used to calculate the gradient during
+    #         the process of stochastic gradient descent.
+    #     learning_rate (default=0.001)
+    #         The rate at which the model changes during stochastic gradient
+    #         descent.
+    #     seed (default=0)
+    #         The seed used for random processes.
+    #     """
+    #     super().__init__(epochs=epochs, batch_size=batch_size, learning_rate=learning_rate, seed=seed)
 
     def calc_gradient(self, batch_X, batch_y):
         """
@@ -73,21 +73,21 @@ class LinearRegressor(SGDRegressor):
         gradient /= batch_X.shape[0]
         return gradient
 
-    def train(self, X, y):
-        """
-        Trains the LinearRegressor using stochastic gradient descent and the
-        initialized hyperparameters.
+    # def train(self, X, y):
+    #     """
+    #     Trains the LinearRegressor using stochastic gradient descent and the
+    #     initialized hyperparameters.
 
-        Parameters:
-        ----------
-        X
-            A dataframe containing rows representing observations 
-            without a label column. Strictly numeric.
-        y
-            A dataframe (or series) containing the labels for each
-            observation in X.
-        """
-        super().train(X, y)
+    #     Parameters:
+    #     ----------
+    #     X
+    #         A dataframe containing rows representing observations 
+    #         without a label column. Strictly numeric.
+    #     y
+    #         A dataframe (or series) containing the labels for each
+    #         observation in X.
+    #     """
+    #     super().train(X, y)
 
     def predict(self, X):
         """

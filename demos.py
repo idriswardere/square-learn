@@ -39,11 +39,4 @@ def main():
     logreg_error_rate = logreg_errors/len(test_y)
     print("logreg error:", logreg_error_rate)
 
-
-
-
-
-
-
-
 main()

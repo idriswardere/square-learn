@@ -58,6 +58,7 @@ class SGDRegressor(Model):
         self.learning_rate = learning_rate
         self.seed = seed
         random.seed(self.seed)
+        self.trained = False
 
     def calc_gradient(self, batch_X, batch_y):
         """
@@ -107,11 +108,14 @@ class SGDRegressor(Model):
             observation in X.
         """
         ones = pd.DataFrame(np.ones((X.shape[0], 1)))
+        ones.index = X.index
         X_ones = pd.concat((ones, X), axis=1)
         m = X_ones.shape[0]
         n = X_ones.shape[1]
-        self.theta = pd.Series(np.zeros(n))
-        self.theta = self.theta.set_axis(X_ones.columns)
+        if not self.trained:
+            self.theta = pd.Series(np.zeros(n))
+            self.theta = self.theta.set_axis(X_ones.columns)
+            self.trained = True
         for epoch in range(self.epochs):
             for batch in range(m):
                 batch_i = random.sample(range(m), self.batch_size)
