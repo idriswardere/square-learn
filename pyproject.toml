@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sqlearn"
+version = "0.0.1"
+authors = [
+  { name="Idris Wardere", email="iawardere3@gmail.com" },
+  { name="Jeremy Li", email="lij061703@gmail.com" }
+]
+description = "A machine learning library in Python"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+  'numpy >= 1.23.1',
+  'pandas >= 1.4.4'
+]
+
+[project.urls]
+"Homepage" = "https://github.com/idriswardere/square-learn"
