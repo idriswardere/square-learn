@@ -39,6 +39,8 @@ class LogisticRegressor(SGDRegressor):
         Trains the model on a dataset and the corresponding labels.
     predict(self, X):
         Makes prediction from a dataframe of observations.
+    get_weights(self):
+        Returns the trained weights of the model.
     """
 
     def __init__(self, thresh=0.5, epochs=5, batch_size=1, learning_rate=0.001, seed=0):

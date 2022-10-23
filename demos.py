@@ -30,7 +30,8 @@ def main():
 
     linreg_errors = sum(linreg_preds != test_y)
     linreg_error_rate = linreg_errors/len(test_y)
-    print("linreg error:", linreg_error_rate)
+    print(f"linreg error: {linreg_error_rate}")
+    print(f"weights: {linreg.get_weights()}\n")
 
     # Evaluating LogisticRegressor
 
@@ -41,13 +42,7 @@ def main():
 
     logreg_errors = sum(logreg_preds != test_y)
     logreg_error_rate = logreg_errors/len(test_y)
-    print("logreg error:", logreg_error_rate)
-
-
-
-
-
-
-
+    print(f"logreg error: {logreg_error_rate}")
+    print(f"weights: {logreg.get_weights()}\n")
 
 main()

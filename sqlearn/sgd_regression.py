@@ -33,12 +33,13 @@ class SGDRegressor(Model):
         Trains the model on a dataset and the corresponding labels.
     predict(self, X): [NOT IMPLEMENTED]
         Makes prediction from a dataframe of observations.
-
+    get_weights(self):
+        Returns the trained weights of the model.
     """
 
     def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
         """
-        Initializes the SGDRegressor.
+        Initializes the model.
 
         Parameters:
         ----------
@@ -58,6 +59,8 @@ class SGDRegressor(Model):
         self.learning_rate = learning_rate
         self.seed = seed
         random.seed(self.seed)
+        self.theta = None
+        self.trained = False
 
     def calc_gradient(self, batch_X, batch_y):
         """
@@ -94,7 +97,7 @@ class SGDRegressor(Model):
 
     def train(self, X, y):
         """
-        Trains the SGDRegressor using stochastic gradient descent and the
+        Trains the model using stochastic gradient descent and the
         initialized hyperparameters.
 
         Parameters:
@@ -107,11 +110,14 @@ class SGDRegressor(Model):
             observation in X.
         """
         ones = pd.DataFrame(np.ones((X.shape[0], 1)))
+        ones.index = X.index
         X_ones = pd.concat((ones, X), axis=1)
         m = X_ones.shape[0]
         n = X_ones.shape[1]
-        self.theta = pd.Series(np.zeros(n))
-        self.theta = self.theta.set_axis(X_ones.columns)
+        if not self.trained:
+            self.theta = pd.Series(np.zeros(n))
+            self.theta = self.theta.set_axis(X_ones.columns)
+            self.trained = True
         for epoch in range(self.epochs):
             for batch in range(m):
                 batch_i = random.sample(range(m), self.batch_size)
@@ -134,3 +140,15 @@ class SGDRegressor(Model):
             The predicted labels of the observations.
         """
         pass
+
+    def get_weights(self):
+        """
+        Returns the trained weights of the SGDRegressor.
+        Can also be accessed by the attribute 'theta'.
+
+        Returns:
+        ----------
+        w
+            The trained weights of the model.
+        """
+        return self.theta
