@@ -1,4 +1,4 @@
-Collaborated with: Jeremy Li
+Authors: Idris Wardere, Jeremy Li
 
 # What is square-learn?
 
