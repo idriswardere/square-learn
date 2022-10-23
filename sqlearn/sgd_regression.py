@@ -33,12 +33,13 @@ class SGDRegressor(Model):
         Trains the model on a dataset and the corresponding labels.
     predict(self, X): [NOT IMPLEMENTED]
         Makes prediction from a dataframe of observations.
-
+    get_weights(self):
+        Returns the trained weights of the model.
     """
 
     def __init__(self, epochs=5, batch_size=1, learning_rate=0.001, seed=0):
         """
-        Initializes the SGDRegressor.
+        Initializes the model.
 
         Parameters:
         ----------
@@ -58,6 +59,7 @@ class SGDRegressor(Model):
         self.learning_rate = learning_rate
         self.seed = seed
         random.seed(self.seed)
+        self.theta = None
         self.trained = False
 
     def calc_gradient(self, batch_X, batch_y):
@@ -95,7 +97,7 @@ class SGDRegressor(Model):
 
     def train(self, X, y):
         """
-        Trains the SGDRegressor using stochastic gradient descent and the
+        Trains the model using stochastic gradient descent and the
         initialized hyperparameters.
 
         Parameters:
@@ -138,3 +140,15 @@ class SGDRegressor(Model):
             The predicted labels of the observations.
         """
         pass
+
+    def get_weights(self):
+        """
+        Returns the trained weights of the SGDRegressor.
+        Can also be accessed by the attribute 'theta'.
+
+        Returns:
+        ----------
+        w
+            The trained weights of the model.
+        """
+        return self.theta
