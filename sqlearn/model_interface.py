@@ -29,7 +29,7 @@ class Model:
         """
         pass
 
-    def predict(self, x):
+    def predict(self, X):
         """
         Makes predictions from a dataframe of observations.
 
