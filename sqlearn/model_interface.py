@@ -41,7 +41,7 @@ class Model:
         Returns:
         ----------
         y
-            The predicted labels of the observations.
+            The predicted labels of the observations :)
         """
         pass
 
