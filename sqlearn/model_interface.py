@@ -36,7 +36,7 @@ class Model:
         Parameters:
         ----------
         X
-            A dataframe (or series) containing observations.
+            A dataframe containing observations.
 
         Returns:
         ----------
