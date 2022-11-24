@@ -37,7 +37,7 @@ def main():
     # Evaluating LogisticRegressor
 
     logreg = LogisticRegressor(thresh=0.5, epochs=10, batch_size=5, 
-                               learning_rate=0.01, l2_reg_weight=0.001, seed=4)
+                               learning_rate=0.01, l2_reg_weight=0.001, seed=2)
     logreg.train(train_X, train_y)
 
     logreg_preds = logreg.predict(test_X)

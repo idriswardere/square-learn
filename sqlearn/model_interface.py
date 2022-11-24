@@ -24,8 +24,8 @@ class Model:
             A dataframe containing rows representing observations 
             without a label column.
         y
-            A dataframe (or series) containing the labels for each
-            observation in X.
+            A series containing the labels for each observation 
+            in X.
         """
         pass
 
@@ -41,7 +41,8 @@ class Model:
         Returns:
         ----------
         y
-            The predicted labels of the observations.
+            A series containing the predicted labels of the 
+            observations.
         """
         pass
 

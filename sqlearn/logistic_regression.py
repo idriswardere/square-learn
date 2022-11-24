@@ -71,7 +71,7 @@ class LogisticRegressor(SGDRegressor):
         self.thresh = thresh
         super().__init__(epochs, batch_size=batch_size, learning_rate=learning_rate, l2_reg_weight=l2_reg_weight, seed=seed)
 
-    def calc_gradient(self, batch_X, batch_y):
+    def calc_gradient(self, batch_X: pd.DataFrame, batch_y: pd.Series) -> pd.Series:
         """
         A function to calculate the gradient of the loss function.
         
@@ -93,23 +93,7 @@ class LogisticRegressor(SGDRegressor):
         gradient /= batch_X.shape[0]
         return gradient
 
-    def train(self, X, y):
-        """
-        Trains the LogisticRegressor using stochastic gradient descent and the
-        initialized hyperparameters.
-
-        Parameters:
-        ----------
-        X
-            A dataframe containing rows representing observations 
-            without a label column. Strictly numeric.
-        y
-            A dataframe (or series) containing the labels for each
-            observation in X.
-        """
-        super().train(X, y)
-
-    def predict(self, X):
+    def predict(self, X: pd.DataFrame) -> pd.Series:
         """
         Makes predictions from a dataframe of observations.
 

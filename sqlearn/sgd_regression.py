@@ -84,7 +84,7 @@ class SGDRegressor(Model):
         """
         pass
 
-    def sgd(self, batch_X, batch_y):
+    def sgd(self, batch_X: pd.DataFrame, batch_y: pd.Series) -> pd.Series:
         """
         Performs one step of stochastic gradient descent.
 
@@ -97,9 +97,11 @@ class SGDRegressor(Model):
             for batch_X
         """
         gradient = self.calc_gradient(batch_X, batch_y)
-        self.theta = self.theta - (self.learning_rate*gradient + self.l2_reg_weight*self.theta)
+        regularizer = self.l2_reg_weight*self.theta
+        regularizer[0] = 0 # not regularizing bias term
+        self.theta = self.theta - (self.learning_rate*gradient + regularizer)
 
-    def train(self, X, y):
+    def train(self, X: pd.DataFrame, y: pd.Series) -> None:
         """
         Trains the model using stochastic gradient descent and the
         initialized hyperparameters.
@@ -145,7 +147,7 @@ class SGDRegressor(Model):
         """
         pass
 
-    def get_weights(self):
+    def get_weights(self) -> pd.Series:
         """
         Returns the trained weights of the SGDRegressor.
         Can also be accessed by the attribute 'theta'.
