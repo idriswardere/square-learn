@@ -37,7 +37,7 @@ class LinearRegressor(SGDRegressor):
         Returns the trained weights of the model.
     """
 
-    def calc_gradient(self, batch_X, batch_y):
+    def calc_gradient(self, batch_X: pd.DataFrame, batch_y: pd.Series) -> pd.Series:
         """
         A function to calculate the gradient of the loss function.
         
@@ -59,7 +59,7 @@ class LinearRegressor(SGDRegressor):
         gradient /= batch_X.shape[0]
         return gradient
 
-    def predict(self, X):
+    def predict(self, X: pd.DataFrame) -> pd.Series:
         """
         Makes predictions from a dataframe of observations.
 
