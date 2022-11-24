@@ -97,7 +97,9 @@ class SGDRegressor(Model):
             for batch_X
         """
         gradient = self.calc_gradient(batch_X, batch_y)
-        self.theta = self.theta - (self.learning_rate*gradient + self.l2_reg_weight*self.theta)
+        regularizer = self.l2_reg_weight*self.theta
+        regularizer[0] = 0 # not regularizing bias term
+        self.theta = self.theta - (self.learning_rate*gradient + regularizer)
 
     def train(self, X: pd.DataFrame, y: pd.Series) -> None:
         """
