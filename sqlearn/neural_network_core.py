@@ -1,17 +1,9 @@
 import numpy as np
-import pandas as pd
 
 class Module:
     """
     An interface for modules in the modular neural network.
 
-    Attributes:
-    ----------
-    input_size
-        The size of the input into the module from a forward pass.
-    output_size
-        The size of the output that the model returns from a forward pass.
-    
     Functions:
     ----------
     forward(self, input):
@@ -61,7 +53,7 @@ class Module:
 
     def update(self):
         """
-        Updates the parameters of the module if possible.
+        Updates the parameters of the module if necessary.
         """
         pass
 
