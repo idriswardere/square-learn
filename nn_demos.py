@@ -1,6 +1,6 @@
 import numpy as np
-from sqlearn.neural_network_modules import Linear
-from sqlearn.neural_network_modules import Sigmoid
+from sqlearn.nn.modules import Linear
+from sqlearn.nn.modules import Sigmoid
 
 
 

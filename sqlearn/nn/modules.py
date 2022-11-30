@@ -1,5 +1,62 @@
 import numpy as np
-from .neural_network_core import Module
+
+class Module:
+    """
+    An interface for modules in the modular neural network.
+
+    Functions:
+    ----------
+    forward(self, input):
+        Returns the output of the module's forward pass, where the input is
+        either the input data or a previous module's forward pass.
+    backward(self, dldo):
+        Given the derivative of the loss with respect to the output of the 
+        module, dl/do, this returns the derivative of the loss with respect to the 
+        input of the module, dl/di.
+    update(self):
+        Updates the parameters of the model. Depending on the module, this may do
+        nothing.
+    """
+
+    def forward(self, input):
+        """
+        Returns the output of the module's forward pass
+
+        Parameters:
+        ----------
+        input
+            The input data or a previous module's forward pass.
+
+        Returns:
+        ----------
+        output
+            The output of the module's forward pass.
+        """
+        pass
+
+    def backward(self, dldo):
+        """
+        Returns the derivative of the loss with respect to the 
+        input of the module.
+
+        Parameters:
+        ----------
+        dldo
+            The derivative of the loss with respect to the output of the module.
+
+        Returns:
+        ----------
+        dldi
+            The derivative of the loss with respect to the input of the module.
+        """
+        pass
+
+    def update(self):
+        """
+        Updates the parameters of the module if necessary.
+        """
+        pass
+
 
 class InputLayer(Module):
     """
