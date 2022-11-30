@@ -111,5 +111,8 @@ class Linear(Module):
         self.weights = self.weights - self.learning_rate*self.dldw
 
 
+# TODO: Loss modules
+
+
 
     

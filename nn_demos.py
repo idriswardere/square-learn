@@ -23,9 +23,15 @@ def main():
     sig = Sigmoid()
     lf1 = lin1.forward(train_X[0])
     sf1 = sig.forward(lf1)
+    sb1 = sig.backward(1)
+    lb1 = lin1.backward(sb1)
     print(train_X[0])
-    print(lf1)
-    print(sf1)
+    print("Lin1 Forward:", lf1)
+    print("Sig Forward:", sf1)
     print("Lin1 Weights:", lin1.weights)
+    print("--------------")
+    print("Sig Backward:", sb1)
+    print("Lin1 Backward:", lb1)
+
 
 main()

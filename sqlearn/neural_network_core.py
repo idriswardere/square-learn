@@ -76,11 +76,11 @@ class ModuleNode:
     
     def __init__(self, module, loss=False, next=None, prev=None):
         self.module = module
-        self.loss = loss
+        self.loss = loss # might scrap for self.loss_module in NN?
         self.next = next
         self.prev = prev
 
-class NeuralNetwork(Module):
+class NeuralNetwork(Module): # also implements model?? (would need train/predict functions)
     """
     A neural network.
     """
@@ -97,6 +97,9 @@ class NeuralNetwork(Module):
     def update(self): # TODO
         pass
 
-    def add(): # TODO
+    def add(self, module): # TODO
+        pass
+    
+    def set_loss(self, module): # TODO
         pass
     
