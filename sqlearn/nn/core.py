@@ -2,6 +2,7 @@ import numpy as np
 from .modules import Module
 from.modules import LossModule
 from .modules import InputLayer
+from ..model_interface import Model
 
 class ModuleNode:
     """
@@ -24,7 +25,7 @@ class ModuleNode:
         self.next = next
         self.prev = prev
 
-class NeuralNetwork(Module): # also implements model?? (would need train/predict functions)
+class NeuralNetwork(Module, Model):
     """
     A modular neural network.
 
@@ -53,6 +54,15 @@ class NeuralNetwork(Module): # also implements model?? (would need train/predict
         Includes loss module.
     update(self)
         Updates the parameters of the model.
+    loss(self, y_hat, y)
+        Calculates the loss. Also may update cache in loss module.
+    set_loss_module(self, module)
+        Sets the loss module.
+    train(self, X, Y)
+        Trains the neural network from data and its labels.
+    predict(self, X)
+        Makes predictions given observed data using the neural network.
+
     
     """
     
@@ -163,7 +173,7 @@ class NeuralNetwork(Module): # also implements model?? (would need train/predict
 
     def loss(self, y_hat: np.ndarray, y: np.ndarray) -> np.ndarray:
         """
-        Calculates the loss.
+        Calculates the loss. Also may update cache in loss module.
 
         Parameters:
         ----------
@@ -175,12 +185,12 @@ class NeuralNetwork(Module): # also implements model?? (would need train/predict
         Returns:
         ----------
         loss
-            The loss.
+            The calculated loss.
         """
         result = self.loss_module.forward(y_hat)
         return result
     
-    def set_loss_module(self, module: LossModule) -> None: # TODO
+    def set_loss_module(self, loss_module: LossModule) -> None:
         """
         Sets the loss module of the neural network.
 
@@ -189,5 +199,49 @@ class NeuralNetwork(Module): # also implements model?? (would need train/predict
         module
             The loss module to be set.
         """
-        self.loss_module = module
+        self.loss_module = loss_module
+
+    def train(self, X: np.ndarray, Y: np.ndarray, epochs: int=100, seed: int=0) -> float: # TODO
+        """
+        Trains the neural network from data and its labels.
+
+        Parameters:
+        ----------
+        X
+            The observation data.
+        Y
+            The true labels of the observation data.
+
+        Returns:
+        ----------
+        losses
+            An array containing the average loss at the end of each epoch.
+        """
+        np.random.seed(seed)
+        losses = np.zeros(epochs)
+        for epoch in range(epochs):
+            np.random.shuffle(X)
+            for i, x in enumerate(X):
+                y_hat = self.forward(x)
+                y = Y[i]
+                dldi, loss = self.backward_with_loss(y_hat, y)
+                losses[epoch] += loss
+                self.update()
+            losses[epoch] /= X.shape[0]
+        return losses
+
+
+
+
+
+    def predict(self, X: np.ndarray) -> np.ndarray: # TODO
+        """
+        Makes predictions given observed data using the neural network.
+
+        Parameters:
+        ----------
+        X
+            The observation data.
+        """
+        pass
     

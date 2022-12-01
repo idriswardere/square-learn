@@ -170,7 +170,8 @@ class Linear(Module):
         self.weights = self.weights - self.learning_rate*self.dldw
 
 
-# TODO: Loss modules & Relu/elu
+# TODO: Relu/elu & other modules (convolution?)
+
 
 class LossModule:
     """
@@ -229,9 +230,9 @@ class MeanSquaredError(LossModule):
         self.y_hat_cache = None
         self.y_cache = None
 
-    def forward(self, y_hat: np.ndarray, y: np.ndarray) -> np.ndarray:
+    def forward(self, y_hat: np.ndarray, y: np.ndarray) -> float:
         """
-        Forward pass of MSE. Calculated the mean squared error.
+        Forward pass of MSE. Calculates the mean squared error.
         """
         loss = np.sum(np.square(y_hat - y))
         loss /= y_hat.shape[0]
@@ -249,6 +250,6 @@ class MeanSquaredError(LossModule):
         backward_pass = (2/n)*(y_hat-y)
         return backward_pass
 
-
+# TODO: Cross entropy loss
 
     
