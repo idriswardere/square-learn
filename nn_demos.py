@@ -47,8 +47,11 @@ def main():
     print(f"Backward: {nn.backward(1)}")
     print(f"Backward with loss: {nn.backward_with_loss(nnf1, train_y[0])}")
 
-    losses = nn.train(train_X, train_y)
+    losses = nn.train(train_X, train_y, epochs=300)
     print(losses)
+    preds = nn.predict(test_X)
+    print(preds)
+    print(test_y)
 
 
 main()

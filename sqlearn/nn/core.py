@@ -242,6 +242,16 @@ class NeuralNetwork(Module, Model):
         ----------
         X
             The observation data.
+
+        Returns:
+        ----------
+        preds
+            The predictions from the neural network based on the data.
         """
-        pass
+        preds = []
+        for x in X:
+            y_hat = self.forward(x)
+            preds.append(y_hat)
+        preds_mat = np.array(preds)
+        return preds_mat
     
