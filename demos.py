@@ -29,7 +29,7 @@ def main():
     linreg_preds = linreg.predict(test_X)
     linreg_preds = linreg_preds > 0.5
 
-    linreg_errors = sum(linreg_preds != test_y)
+    linreg_errors = np.sum(linreg_preds != test_y)
     linreg_error_rate = linreg_errors/len(test_y)
     print(f"linreg error: {linreg_error_rate}")
     print(f"weights: {linreg.get_weights()}\n")
@@ -42,7 +42,7 @@ def main():
 
     logreg_preds = logreg.predict(test_X)
 
-    logreg_errors = sum(logreg_preds != test_y)
+    logreg_errors = np.sum(logreg_preds != test_y)
     logreg_error_rate = logreg_errors/len(test_y)
     print(f"logreg error: {logreg_error_rate}")
     print(f"weights: {logreg.get_weights()}\n")

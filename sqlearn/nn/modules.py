@@ -173,7 +173,32 @@ class Sigmoid(Module):
         return dldi
 
 
-# TODO: Relu/elu & other modules (convolution?)
+class ReLU(Module):
+    """
+    A ReLU module. Performs the ReLU function elementwise on the input.
+    """
+
+    def __init__(self) -> None:
+        self.input_cache = None
+
+    def forward(self, input: np.ndarray) -> np.ndarray:
+        """
+        Forward pass of ReLU.
+        """
+        output = np.maximum(0, input)
+        self.input_cache = input
+        #print(output, input)
+        return output
+
+    def backward(self, dldo: np.ndarray) -> np.ndarray: # TODO
+        """
+        Backward pass of ReLU.
+        """
+        input = self.input_cache
+        dldi = np.heaviside(input, 0.5)*dldo
+        return dldi
+
+# TODO: Softmax & Crossentropy, Convolution support?
 
 
 class LossModule:

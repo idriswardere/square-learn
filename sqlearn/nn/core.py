@@ -25,6 +25,14 @@ class ModuleNode:
         self.next = next
         self.prev = prev
 
+def shuffle_in_unison(A, B):
+    """
+    Returns a shuffled copies of A and B that were shuffled in the same way
+    along its first axis.
+    """
+    p = np.random.permutation(len(A))
+    return A[p], B[p]
+
 class NeuralNetwork(Module, Model):
     """
     A modular neural network.
@@ -220,14 +228,14 @@ class NeuralNetwork(Module, Model):
         np.random.seed(seed)
         losses = np.zeros(epochs)
         for epoch in range(epochs):
-            np.random.shuffle(X)
-            for i, x in enumerate(X):
+            X_copy, Y_copy = shuffle_in_unison(X, Y)
+            for i, x in enumerate(X_copy):
                 y_hat = self.forward(x)
-                y = Y[i]
+                y = Y_copy[i]
                 dldi, loss = self.backward_with_loss(y_hat, y)
                 losses[epoch] += loss
                 self.update()
-            losses[epoch] /= X.shape[0]
+            losses[epoch] /= X_copy.shape[0]
         return losses
 
 
