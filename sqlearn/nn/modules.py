@@ -85,32 +85,6 @@ class InputLayer(Module):
     
     def backward(self, dldo: np.ndarray) -> np.ndarray:
         return dldo
-        
-
-class Sigmoid(Module):
-    """
-    A sigmoid module. Performs the sigmoid operation elementwise on the input.
-    """
-
-    def __init__(self) -> None:
-        self.output_cache = None
-
-    def forward(self, input: np.ndarray) -> np.ndarray:
-        """
-        Forward pass of sigmoid module.
-        """
-        exp = np.exp(input)
-        output = exp/(1+exp)
-        self.output_cache = output
-        return output
-    
-    def backward(self, dldo: np.ndarray) -> np.ndarray:
-        """
-        Backward pass of sigmoid module.
-        """
-        output = self.output_cache
-        dldi = output*(1-output)*dldo
-        return dldi
 
 
 def random_init(shape: tuple, scale: float=1) -> np.ndarray:
@@ -138,11 +112,12 @@ class Linear(Module):
 
     def __init__(self, input_size: int, output_size: int,
                 learning_rate: float=0.01, r_scale: float=1,
-                seed: int=0) -> None:
+                seed: int=None) -> None:
         self.input_size = input_size
         self.output_size = output_size
         self.learning_rate = learning_rate
-        np.random.seed(seed)
+        if seed:
+            np.random.seed(seed)
         self.weights = random_init((output_size, 1+input_size), scale=r_scale)
     
     def forward(self, input: np.ndarray) -> np.ndarray:
@@ -159,6 +134,8 @@ class Linear(Module):
         """
         Backward pass of linear module.
         """
+        #print(f"weights: {self.weights.T.shape} dldo dim: {np.ndim(dldo)}")
+        #print(dldo)
         dldi = self.weights[:, 1:].T @ dldo
         self.dldw = np.outer(dldo, self.input_b_cache)
         return dldi
@@ -168,6 +145,32 @@ class Linear(Module):
         Updating the weight matrix.
         """
         self.weights = self.weights - self.learning_rate*self.dldw
+        
+
+class Sigmoid(Module):
+    """
+    A sigmoid module. Performs the sigmoid operation elementwise on the input.
+    """
+
+    def __init__(self) -> None:
+        self.output_cache = None
+
+    def forward(self, input: np.ndarray) -> np.ndarray:
+        """
+        Forward pass of sigmoid module.
+        """
+        exp = np.exp(input)
+        output = exp/(1+exp)
+        self.output_cache = output
+        return output
+    
+    def backward(self, dldo: np.ndarray) -> np.ndarray:
+        """
+        Backward pass of sigmoid module.
+        """
+        output = self.output_cache
+        dldi = output*(1-output)*dldo
+        return dldi
 
 
 # TODO: Relu/elu & other modules (convolution?)
@@ -246,6 +249,9 @@ class MeanSquaredError(LossModule):
         """
         y_hat = self.y_hat_cache
         y = self.y_cache
+        if np.ndim(y) == 0: # turns floats to arrays to match output
+            y = np.array([y])
+        assert(y_hat.shape == y.shape)
         n = y_hat.shape[0]
         backward_pass = (2/n)*(y_hat-y)
         return backward_pass
