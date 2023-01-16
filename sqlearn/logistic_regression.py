@@ -46,7 +46,8 @@ class LogisticRegressor(SGDRegressor):
         Returns the trained weights of the model.
     """
 
-    def __init__(self, thresh=0.5, epochs=5, batch_size=1, learning_rate=0.001, l2_reg_weight=0, seed=0):
+    def __init__(self, thresh=0.5, epochs=5, batch_size=1, learning_rate=0.001,
+                l2_reg_weight=0, seed=0) -> None:
         """
         Initializes the LogisticRegressor.
 
