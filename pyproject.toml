@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "square-learn"
-version = "1.0.0"
+version = "2.0.0"
 authors = [
   { name="Idris Wardere", email="iawardere3@gmail.com" },
   { name="Jeremy Li", email="lij061703@gmail.com" }
